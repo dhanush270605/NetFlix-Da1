@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix</title>
+    <link rel="shortcut icon" href="netflix.jpg" type="image/x-icon">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        
+        #one{
+            float: right;
+            background-color: red;
+            text-decoration: none;
+            color: #ffffff;
+            text-align: center;
+            height: 30px;
+            width: 80px;
+            padding: 10px;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+        .container{
+            width: 350px;
+            height: 250px;
+            background-color: rgb(255, 255, 251);
+            border: 2px solid #ffffff;
+            margin: 50px auto; 
+            font-size: 20px;
+        }
+        ul{
+            list-style-type: none;
+        }
+        .checklist li::before{
+            content: "✔";
+            margin-right: 10px;
+            color: red;
+        }
+        button{
+            height: 40px;
+            width: 80px;
+            background-color: red;
+            color: #ffffff;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: rgb(149, 5, 5);
+        }
+        hr{
+            height: 1px;
+            background-color: black;
+        }
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            padding: 10px 0;
+            background-color: #f3f3f3;
+        }
+        #b,#c,#d,#e,#f,#g{
+            margin: 10px;
+            color: gray;
+        }
+        #p2{
+            color: blue;
+        }
+        #p1,#p2{
+            display: inline;
+        }
+        body{
+            overflow-x: hidden;
+        }
+        .lli{
+            display: flex;
+            flex-direction: row;
+        }
+        button{
+            height: 50px;
+            width: 130px;
+        }
+        #one{
+            margin-right: 30px;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <header>
+    <img src="netflixLOGO.png" alt="" height="60px" width="100px">
+    <a href="#abc" id="one">Sign-out</a>
+    <hr>
+    </header>
+        <div class="container">
+        <h1>Choose your plan.</h1>
+            <ul class="checklist">
+                <li>No commitments, cancel anytime.</li>
+                <li>Everything on Netflix for one low price.</li>
+                <li>No ads and no extra fees. Ever.</li>
+            </ul>
+            <center>
+                <a href="paymentPage.html"><button id="nextbutton">NEXT</button></a>
+                
+                </center>
+    </div>
+    <footer>
+        <div id="lli">
+        <p id="p1">Questions Call-</p>
+        <p id="p2">000-800-919-1694</p>
+        </div>
+        <select>
+            <option>English</option>
+            <option>Hindi</option>
+            <option>Tamil</option>
+        </select>
+        <div class="links">
+            <a href="#" id="b">FAQ</a>
+            <a href="#" id="c">Help Centre</a>
+            <a href="#" id="d">Terms of Use</a>
+            <a href="#" id="e">Privacy</a>
+            <a href="#" id="f">Cookie Preferences</a>
+            <a href="#" id="g">Corporate Information</a>
+        </div>
+        
+    </footer>
+</body>
+</html>

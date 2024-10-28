@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #singOut{
+            width: 120px;
+            height: 35px;
+            border: none;
+            background-color: red;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 30px;
+            margin-top: 20px;
+        }
+        #topContainer{
+            display: flex;
+            justify-content: space-between;
+        }
+        #mobileContainer{
+            display: flex;
+            justify-content: center;
+        }
+        #mobileIn{
+            position: absolute;
+            top: 0;
+                display: grid;
+                justify-content: center;
+        }
+        #mobileIn div img{
+            margin-left: 660px;
+            margin-top: 180px;
+            width: 200px;
+        }
+        .loader{
+    display: block;
+    position: relative;
+    height: 32px;
+    width: 200px;
+    background: #fff;
+    border:2px solid #000000;
+    color: red;
+    overflow: hidden;
+  }
+  .loader::before{
+    content: '';
+    background: red;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    animation: loading 10s linear infinite;
+  }
+  .loader:after{
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 24px;
+    line-height: 32px;
+    color: rgb(0,255,255);
+    mix-blend-mode: difference;
+    animation: percentage 10s linear infinite;
+  }
+  
+  @keyframes loading {
+    0% { width: 0 }
+    100% { width: 100% }
+  }
+  @keyframes percentage {
+    0% { content: "0%"}
+    5% { content: "5%"}
+    10% { content: "10%"}
+    20% { content: "20%"}
+    30% { content: "30%"}
+    40% { content: "40%"}
+    50% { content: "50%"}
+    60% { content: "60%"}
+    70% { content: "70%"}
+    80% { content: "80%"}
+    90% { content: "90%"}
+    95% { content: "95%"}
+    96% { content: "96%"}
+    97% { content: "97%"}
+    98% { content: "98%"}
+    99% { content: "99%"}
+    100% { content: "100%"}
+  }
+    #loadd{
+        margin-left: 655px;
+        margin-top: 50px;
+        display: none;
+    }
+    #form1{
+        margin-left: 680px;
+    }
+    #enterUPI{
+        font-size: 25px;
+        margin-left: -19px;
+        font-family: 'Trebuchet MS', sans-serif;
+        font-weight: bold;
+    }
+
+
+    .loaderr {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: inline-block;
+  border-top: 4px solid rgb(4, 201, 255);
+  border-right: 4px solid transparent;
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+.loaderr::after {
+  content: '';  
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border-left: 4px solid #7bff00ca;
+  border-bottom: 4px solid transparent;
+  animation: rotation 0.5s linear infinite reverse;
+}
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} 
+    #ip{
+        width: 180px;
+        height: 30px;
+        margin-top: 10px;
+        margin-left: -18px;
+        border-radius: 3px;
+        border: 1px solid rgb(0, 143, 225);
+        outline: none;
+        font-size: 17px;
+        padding-left: 10px;
+    }
+    #nxt{
+        margin-top: 10px;
+        width: 150px;
+        height: 37px;
+        background-color: rgb(4, 201, 255);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 18px;
+    }
+
+    #PaymentProcessing{
+        margin-left: 740px;
+        margin-top: 38px;
+    }
+
+    #plans{
+        margin-left: 680px;
+        margin-top: -30px;
+    }
+
+    #cost{
+        text-align: center;
+        margin-left: -30px;
+        font-size: 20px;
+        margin-top: -17px;
+        margin-bottom: 14px;
+    }
+    #loadd1{
+        display: none;
+    }
+    #scpg{
+        position: absolute;
+        margin-top: 290px;
+        margin-right: -200px;
+    }
+
+    </style>
+</head>
+<body>
+    <div>
+        <div id="topContainer">
+            <img src="netflixLOGO.png" alt="" width="100" height="65">
+            <h1>Payment Page</h1>
+            <a href="index.html"><button id="singOut">Sign Out</button></a>
+        </div>
+        <div>
+            
+        </div>
+        <div id="mobileContainer">
+            <img src="PhonePic.png" alt="" width="400">
+        </div>
+        <div id="mobileIn">
+            <div>
+                <img src="netflixLOGO.png" alt="" width="120">
+            </div>
+            <div id="plans">
+                <h3 id="pack"></h3>
+                <h5 id="cost"></h5>
+            </div>
+            <div id="form1">
+                <form action="" onsubmit="next(event)">
+                    <label for="" id="enterUPI">Enter Your UPI ID</label>
+                <br>
+                <input type="text" name="" id="ip" required>
+                <br>
+                <button type="submit" id="nxt">NEXT</button>
+                </form>
+            </div>
+            
+                <div id="loadd">
+                    <span class="loader"></span>
+                </div>
+                <div id="loadd1">
+                    <div id="PaymentProcessing">
+                        <span class="loaderr"></span>
+                        
+                    </div>
+                </div>
+                <div id="scpg">
+                    <img src="" alt="" id="successful" width="400">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        let pack = document.getElementById("pack");
+        let plan = localStorage.getItem("plan");
+        pack.innerHTML = (localStorage.getItem("plan")).toLocaleUpperCase() + " " + "  PLAN" 
+        let cost = document.getElementById("cost")
+        if(plan == "premium"){
+            cost.innerHTML = `Amount To Paid <br> Rs.${649}`
+        }
+        else if(plan == "basic"){
+            cost.innerHTML = `Amount To Paid <br> Rs.${199}`
+        }
+        else if(plan == "standard"){
+            cost.innerHTML = `Amount To Paid <br> Rs.${499}`
+        }
+        else{
+            cost.innerHTML = `Amount To Paid <br> Rs.${149}`
+        }
+
+
+        function next(event) {
+            event.preventDefault();
+            document.getElementById("loadd1").style.display = "block";
+            document.getElementById("nxt").style.display = "none";
+            setTimeout(()=>{
+                document.getElementById("loadd1").style.display = "none";
+                document.getElementById("loadd").style.display = "block";
+
+                setTimeout(()=>{
+                    document.getElementById("loadd").style.display = "none";
+                    document.getElementById("successful").src = "successful.png"; 
+
+                    setTimeout(()=>{
+                        window.location.href = "netflixLogin.html";
+                    },4000)
+                },8000)
+
+            },4000)
+    }
+    </script>
+</body>
+</html>

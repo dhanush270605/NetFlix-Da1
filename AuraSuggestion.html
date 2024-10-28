@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            background-color: rgb(23, 23, 23);
+        }
+        #topMaterials {
+            position: fixed;
+            z-index: 100;
+            top: 0;
+            width: 100vw;
+        }
+        img{
+            border-radius: 5px;
+            transition: 1s ease-in-out;
+        }
+        
+        img:hover{
+            animation-name:pop;
+            animation-duration: 3s;
+        }
+        @keyframes pop{
+            0%{
+                transform: scale(100%);
+            }
+            25%{
+                transform: scale(105%);
+            }
+            75%{
+                transform: scale(105%);
+            }
+            100%{
+                transform: scale(100%);
+            }
+        }
+        .downScrolling img:hover{
+            transform: scale(105%);
+            border-radius: 10px;
+        }
+        #topContainer {
+            display: flex;
+            width: 100vw;
+            background-color: rgb(0, 0, 0);
+            transition: background-color 0.3s ease;
+        }
+        #topContainer.transparent {
+            background-color: transparent;
+            box-shadow: none;
+        }
+        #topContainer div img {
+            margin-left: 2vw;
+        }
+        #topContainer .topButtons {
+            margin-left: 2vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #topContainer{
+            z-index: 2000;
+        }
+        #topContainer .topButtons button {
+            background-color: transparent;
+            color: white;
+            border: none;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            margin-left: 8px;
+        }
+
+        #topContainer .topButtons button:hover {
+            background: rgb(245,137,41);
+            background: radial-gradient(circle, rgba(255, 89, 0, 0.909) 0%, rgba(255,0,0,1) 66%);
+            height: 40px;
+            transform: scale(105%);
+            border-radius: 5px;
+        }
+        #searchIcon {
+            color: white;
+            display: flex;
+            align-items: center;
+            margin-left: 33vw;
+        }
+        select {
+            background-color: transparent;
+            border: none;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+        }
+        #searchIcon div, #searchIcon i {
+            margin-left: 15px;
+            cursor: pointer;
+        }
+        #searchIcon div:hover, #searchIcon i:hover {
+            transform: scale(115%);
+        }
+        #coverImage {
+            margin-top: 60px;
+            filter: grayscale(10%);
+        }
+        #playContain {
+            position: absolute;
+            bottom: 0;
+            margin-bottom: 250px;
+            margin-left: 50px;
+        }
+        #PlayBox {
+            width: 120px;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 45px;
+            border-radius: 5px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-weight: bold;
+            margin-left: 20px;
+            transition: 1s ease-in-out;
+        }
+        #PlayBox i {
+            font-size: 23px;
+        }
+        #PlayBox span {
+            font-size: 20px;
+            margin-left: 10px;
+        }
+        #PlayBox:hover, #InfoBox:hover {
+            transform: scale(105%);
+            background-color: rgba(240, 248, 255, 0.797);
+            cursor: pointer;
+        }
+        #PlayBox:active, #InfoBox:active {
+            background-color: black;
+            color: white;
+        }
+        #mostWatch{
+            text-shadow: 2px 2px black;
+        }
+        #InfoBox {
+            width: 150px;
+            background-color: rgba(126, 126, 126, 0.493);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 45px;
+            border-radius: 5px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-weight: bold;
+            margin-left: 155px;
+            position: relative;
+            color: white;
+            bottom: 44px;
+            transition: 1s ease-in-out;
+        } 
+        #InfoBox i {
+            font-size: 23px;
+        }
+        #InfoBox span {
+            font-size: 20px;
+            margin-left: 10px;
+        }
+        #mostContent {
+            color: white;
+            font-size: 30px;
+            font-family: Arial, Helvetica, sans-serif;
+            text-shadow: 2px 2px rgba(0, 0, 0, 0.731);
+        }
+        #plas {
+            position: relative;
+            top: 50px;
+            left: 60px;
+        }
+        .downScrolling {
+            margin-top: 20px;
+        }
+        .downScrolling h2 {
+            color: white;
+            margin-left: 30px;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+        .imageContainer {
+            display: flex;
+            width: 99vw;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .imageWrapper {
+            display: flex;
+            gap: 5px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .imageWrapper img {
+            width: 250px;
+            flex-shrink: 0;
+        }
+        .scrollRight, .scrollLeft {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1;
+        }
+        .scrollRight {
+            right: 0;
+        }
+        .scrollLeft {
+            left: 0;
+        }
+        .scrollRight:hover, .scrollLeft:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        #downScrolling1{
+            position: absolute;
+            top: 0;
+            transform: translateY(270%);
+        }
+        #downScrolling2,#downScrolling3,#downScrolling4,#downScrolling5,#downScrolling6,#downScrolling7{
+            position: relative;
+            top: 70px;
+        }
+        #footerIcons{
+            margin-top: 120px;
+            /* margin-left: 100px; */
+            margin-left: 100px;
+            display: grid;
+            /* gap: 20px; */
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+            color: white;
+            font-size: 25px;
+            z-index: 2;
+        }
+        #footerIcons i:hover{
+            cursor: pointer;
+            transform: scale(120%);
+            background-color: white;
+            color: black;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 45%;
+        }
+        #footerInfo{
+            color: rgba(255, 255, 255, 0.662);
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            justify-content: center;
+            margin-left: 100px;
+            margin-top: 20px;
+            font-family:Arial, Helvetica, sans-serif;
+
+        }
+        #footerInfo p:hover{
+            text-decoration: underline;
+            cursor: pointer;
+            
+        }
+        #Service{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.662);
+            margin-left: 100px;
+            width: 100px;
+            height: 30px;
+            border: 1px solid white;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+        #Copyrights{
+            color: rgba(255, 255, 255, 0.662);
+            margin-left: 100px;
+            cursor: pointer;
+        }
+        #logo{
+            height: 60px;
+            position: relative;
+            top: 7px;
+        }
+        video{
+            display: none;
+            position: absolute;
+            z-index: 100;
+            top: 0;
+            left: 0;
+            width: 1510px;
+            transition: 1s ease-in-out;
+        }
+        #playContain{
+            z-index: 100;
+        }
+        #myLang{
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.445);
+            border-radius: 5px;
+            width: 170px;
+            box-shadow: inset 0px 0px 50px .1px rgba(0, 0, 0, 0.678);
+            backdrop-filter: blur(4px);
+            color: aliceblue;
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            height: 440px;
+            gap: 0px;
+            height: 272px;
+        }
+        #myLang h3:hover{
+            transform: scale(100%);
+            background-color: red;
+            cursor: pointer;
+            text-align: center;
+        }
+        #myLang h3{
+            margin: 0;
+            padding: 10px 0;
+            line-height: 1; /* Reduces the extra space below the text */
+            transition: background-color 0.5s, transform 0.3s;
+        }
+        #myLangDiv{
+            display: none;
+            position: fixed;
+            top: 0;
+            margin-left: 570px;
+            z-index: 200;
+            margin-top: 58px;
+            transition: 1s;
+        }
+
+
+        
+        .suggDiv{
+            z-index: 201;
+            position: fixed;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color:rgba(0, 0, 0, 0.596);
+            display: grid;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .suggContainer{
+            width: 850px;
+            border-radius: 12px;
+            height: 450px;
+            box-shadow: inset 0px 0px 30px 20px rgba(44, 24, 24, 0.671);
+            box-shadow: 0px 0px 30px 20px rgba(61, 32, 32, 0.623);
+            background-color: red;
+        }
+        #imgBore{
+            margin-left: 260px;
+        }
+        #isee{
+            margin-left: 100px;
+            font-size: 22px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            color: white;
+        }
+        #suuBtn{
+            margin-left: 280px;
+            display: flex;
+            gap: 30px;
+        }
+        #suuBtn button{
+            width: 120px;
+            height: 40px;
+            border: none;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font: bold;
+            font-size: 16px;
+            background-color: black;
+            color: white;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: .3s ease-in-out;
+        }
+        #suuBtn button:hover{
+            background-color: transparent;
+            border: 2px solid white;
+            transform: scale(110%);
+        }
+        #parentSuggDiv{
+            display: none;
+        }
+        a{
+            color: white;
+        }
+        #iconLine{
+            position: fixed;
+            z-index: 300;
+            top: 0;
+            margin-top: 45px;
+            margin-left: 172px;
+        }
+        #line{
+            transition: 1s ease-in-out;
+            animation-name: lineI;
+            animation-duration: 7s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            background-color: red;
+            height: 4px;
+            display: flex;
+            justify-content: center;
+        }
+        @keyframes lineI{
+            0%{
+                width:  0px;
+            }
+            40%{
+                width: 50px;
+            }
+            100%{
+                width: 0px;
+            }
+        }
+
+
+
+
+        #searchBoxContainer{
+            display: none;
+            position: fixed;
+            z-index: 350;
+            top: 0;
+            margin-left: 1080px;
+            margin-top: 18px;
+        }
+        #searchBarr{
+            width: 150px;
+            height: 25px;
+            outline: none;
+            border: none;
+            background-color: none;
+            background: none;
+            font-size: 20px;
+        }
+        #serachBox{
+            width: 200px;
+            height: 30px;
+            background-color: white;
+        }
+        #searchBarr{
+            margin-left: 10px;
+        }
+        #glassS{
+            margin-left: 10px;
+        }
+        #mainSearch{
+            transition: 3s ease-in-out;
+        }
+        #neewAndPop{
+            text-decoration: none;
+        }
+        
+
+
+        
+    </style>
+</head>
+<body>
+    <div id="topMaterials">
+        <div id="topContainer">
+            <div><img src="netflixLOGO.png" alt="" width="100" id="logo"></div>
+            
+            <div class="topButtons">
+                <button title="Home" id="HomeIcon">Home</button>
+                <button title="Tv Shows">Tv Shows</button>
+                <button title="Movies">Movies</button>
+                <button title="New And Popular" ><a href="#downScrolling2" id="neewAndPop">New & Popular</a></button>
+                <button title="My List">My List</button>
+                <button title="Browse by Language" id="languageL">Browse by Languages</button>
+            </div>
+            <div id="searchIcon">
+                <i class="fa-solid fa-magnifying-glass" title="click to Search" id="mainSearch"></i>
+                <div><p>Children</p></div>
+                <i class="fa-regular fa-bell"></i>
+                <div><img src="whose4.png" alt="" width="30"></div>
+                <select></select>
+            </div>
+        </div>
+    </div>
+    <div id="iconLine">
+        <div id="line">
+        </div>
+    </div>
+
+    
+
+
+    <div id="coverImage">
+        <img src="moneyHeist.png" alt="" width="1500" id="bgimg">
+        <div id="videoDiv">
+            <video plaState="hidden">
+                <source src="money.mp4">
+            </video>
+        </div>
+        <div id="playContain">
+            <div id="plas">
+                <div id="PlayBox" title="play"><i class="fa-solid fa-play"></i> <span>Play</span></div>
+                <div id="InfoBox" title="More Information"><i class="fa-solid fa-circle-info"></i> <span>More Info</span></div>
+            </div>
+            <div id="mostContent"><p>Most Watched Series On AURAFLIX !</p></div>
+        </div>
+    </div>
+    <div class="downScrolling" id="downScrolling1" title="Select Movie">
+        <h2 id="mostWatch">Most Watched on AURAFLIX !</h2>
+        <div class="imageContainer">
+            <button class="scrollLeft" title="left Scroll"><i class="fa-solid fa-chevron-left" title="left Scroll"></i></button>
+            <div class="imageWrapper" id="imageWrapper1">
+                <img src="i1.png" alt="Inception" width="250" height="115">
+                <img src="i3.png" alt="Inception" width="250" height="115">
+                <img src="i2.png" alt="Inception" width="250" height="115">
+                <img src="i4.png" alt="Inception" width="250" height="115">
+                <img src="i5.png" alt="Inception" width="250" height="115">
+                <img src="i6.png" alt="Inception" width="250" height="115">
+                <img src="i29.png" alt="Inception" width="250" height="115">
+                <img src="i8.png" alt="Inception" width="250" height="115">
+                <img src="i9.png" alt="Inception" width="250" height="115">
+                <img src="i10.png" alt="Inception" width="250" height="115">
+                <img src="i11.png" alt="Inception" width="250" height="115">
+                <img src="i12.png" alt="Inception" width="250" height="115">
+            </div>
+            <button class="scrollRight" title="Right Scroll"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div class="downScrolling" id="downScrolling2" title="Select Movie">
+        <h2>Trending Now >></h2>
+        <div class="imageContainer">
+            <button class="scrollLeft" title="left Scroll"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="imageWrapper" id="imageWrapper2">
+                <img src="i13.png" alt="Inception" width="250" height="115">
+                <img src="i14.png" alt="Inception" width="250" height="115">
+                <img src="i15.png" alt="Inception" width="250" height="115">
+                <img src="i16.png" alt="Inception" width="250" height="115">
+                <img src="i17.png" alt="Inception" width="250" height="115">
+                <img src="i18.png" alt="Inception" width="250" height="115">
+                <img src="i19.png" alt="Inception" width="250" height="115">
+                <img src="i20.png" alt="Inception" width="250" height="115">
+                <img src="i21.png" alt="Inception" width="250" height="115">
+                <img src="i22.png" alt="Inception" width="250" height="115">
+                <img src="i23.png" alt="Inception" width="250" height="115">
+                <img src="i24.png" alt="Inception" width="250" height="115">
+            </div>
+            <button class="scrollRight" title="Right Scroll"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div class="downScrolling" id="downScrolling3" title="Select Movie">
+        <h2>Top Picks for You >></h2>
+        <div class="imageContainer">
+            <button class="scrollLeft" title="left Scroll"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="imageWrapper" id="imageWrapper3">
+                <img src="i25.png" alt="Inception" width="250" height="115">
+                <img src="i26.png" alt="Inception" width="250" height="115">
+                <img src="i27.png" alt="Inception" width="250" height="115">
+                <img src="i28.png" alt="Inception" width="250" height="115">
+                <img src="i7.png" alt="Inception" width="250" height="115">
+                <img src="i30.png" alt="Inception" width="250" height="115">
+                <img src="i45.png" alt="Inception" width="250" height="115">
+                <img src="i22.png" alt="Inception" width="250" height="115">
+                <img src="i17.png" alt="Inception" width="250" height="115">
+                <img src="i1.png" alt="Inception" width="250" height="115">
+                <img src="i39.png" alt="Inception" width="250" height="115">
+                <img src="i20.png" alt="Inception" width="250" height="115">
+            </div>
+            <button class="scrollRight" title="Right Scroll"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div class="downScrolling" id="downScrolling4" title="Select Movie">
+        <h2>New Releases >> </h2>
+        <div class="imageContainer">
+            <button class="scrollLeft" title="left Scroll"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="imageWrapper" id="imageWrapper4" >
+                <img src="i31.png" alt="Inception" width="250" height="115">
+                <img src="i32.png" alt="Inception" width="250" height="115">
+                <img src="i33.png" alt="Inception" width="250" height="115">
+                <img src="i34.png" alt="Inception" width="250" height="115">
+                <img src="i35.png" alt="Inception" width="250" height="115">
+                <img src="i36.png" alt="Inception" width="250" height="115">
+                <img src="i43.png" alt="Inception" width="250" height="115">
+                <img src="i23.png" alt="Inception" width="250" height="115">
+                <img src="i52.png" alt="Inception" width="250" height="115">
+                <img src="i5.png" alt="Inception" width="250" height="115">
+                <img src="i24.png" alt="Inception" width="250" height="115">
+                <img src="i47.png" alt="Inception" width="250" height="115">
+            </div>
+            <button class="scrollRight" title="Right Scroll"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div class="downScrolling" id="downScrolling5" title="Select Movie">
+        <h2>Action Movies >> </h2>
+        <div class="imageContainer">
+            <button class="scrollLeft" title="left Scroll"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="imageWrapper" id="imageWrapper5" >
+                <img src="i37.png" alt="Inception" width="250" height="115">
+                <img src="i38.png" alt="Inception" width="250" height="115">
+                <img src="i39.png" alt="Inception" width="250" height="115">
+                <img src="i40.png" alt="Inception" width="250" height="115">
+                <img src="i41.png" alt="Inception" width="250" height="115">
+                <img src="i42.png" alt="Inception" width="250" height="115">
+                <img src="i3.png" alt="Inception" width="250" height="115">
+                <img src="i31.png" alt="Inception" width="250" height="115">
+                <img src="i50.png" alt="Inception" width="250" height="115">
+                <img src="i14.png" alt="Inception" width="250" height="115">
+                <img src="i33.png" alt="Inception" width="250" height="115">
+                <img src="i18.png" alt="Inception" width="250" height="115">
+            </div>
+            <button class="scrollRight" title="Right Scroll"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div class="downScrolling" id="downScrolling6" title="Select Movie">
+        <h2>Hollywood Movies >> </h2>
+        <div class="imageContainer">
+            <button class="scrollLeft" title="left Scroll"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="imageWrapper" id="imageWrapper6" >
+                <img src="i43.png" alt="Inception" width="250" height="115">
+                <img src="i44.png" alt="Inception" width="250" height="115">
+                <img src="i45.png" alt="Inception" width="250" height="115">
+                <img src="i46.png" alt="Inception" width="250" height="115">
+                <img src="i47.png" alt="Inception" width="250" height="115">
+                <img src="i48.png" alt="Inception" width="250" height="115">
+                <img src="i39.png" alt="Inception" width="250" height="115">
+                <img src="i54.png" alt="Inception" width="250" height="115">
+                <img src="i48.png" alt="Inception" width="250" height="115">
+                <img src="i17.png" alt="Inception" width="250" height="115">
+                <img src="i53.png" alt="Inception" width="250" height="115">
+                <img src="i45.png" alt="Inception" width="250" height="115">
+            </div>
+            <button class="scrollRight" title="Right Scroll"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div class="downScrolling" id="downScrolling7" title="Select Movie">
+        <h2>Romantic Movies >> </h2>
+        <div class="imageContainer">
+            <button class="scrollLeft" title="left Scroll"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="imageWrapper" id="imageWrapper7" >
+                <img src="i49.png" alt="Inception" width="250" height="115">
+                <img src="i50.png" alt="Inception" width="250" height="115">
+                <img src="i51.png" alt="Inception" width="250" height="115">
+                <img src="i52.png" alt="Inception" width="250" height="115">
+                <img src="i53.png" alt="Inception" width="250" height="115">
+                <img src="i54.png" alt="Inception" width="250" height="115">
+                <img src="i7.png" alt="Inception" width="250" height="115">
+                <img src="i23.png" alt="Inception" width="250" height="115">
+                <img src="i19.png" alt="Inception" width="250" height="115">
+                <img src="i27.png" alt="Inception" width="250" height="115">
+                <img src="i15.png" alt="Inception" width="250" height="115">
+                <img src="i44.png" alt="Inception" width="250" height="115">
+            </div>
+            <button class="scrollRight" title="Right Scroll"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+    </div>
+    <div>
+        <div id="footerIcons"><i class="fa-brands fa-facebook-f" title="Facebook"></i>
+            <i class="fa-brands fa-instagram" title="Instagram"></i>
+            <i class="fa-brands fa-twitter" title="Twitter"></i>
+            <i class="fa-brands fa-youtube" title="You Tube"></i>
+        </div>
+        <div id="footerInfo">
+            <p>Auto Description</p>
+            <p>Help Center</p>
+            <p>Gift Card</p>
+            <p>Media Center</p>
+            <p>Incestor Relations</p>
+            <p>Jobs</p>
+            <p>Terms of Use</p>
+            <p>privacy</p>
+            <p>legal Notice</p>
+            <p>Cookie Preference</p>
+            <p>Corporate Information</p>
+            <p>Contact us</p>
+        </div>
+        <div id="Service">
+            <p>Service Code</p>
+        </div>
+        <div id="Copyrights">
+            <p>&COPY; 2023MIS VIT STUDENTS Vellore</p>
+        </div>
+
+        <div id="myLangDiv">
+            <div id="myLang">
+                <a href="#downScrolling5" style="text-decoration: none;;"><h3>Tamil</h3></a>
+                <a href="#downScrolling6" style="text-decoration: none;;"><h3>English</h3></a>
+                <a href="#downScrolling7" style="text-decoration: none;;"><h3>Telegu</h3></a>
+                <a href="#downScrolling3" style="text-decoration: none;;"><h3>Malayalan</h3></a>
+                <a href="#downScrolling4" style="text-decoration: none;;"><h3>Karnada</h3></a>
+                <a href="#downScrolling1" style="text-decoration: none;;"><h3>French</h3></a>
+                <a href="#downScrolling2" style="text-decoration: none;;"><h3>Hindi</h3></a>
+            </div>
+        </div>
+        
+    </div>
+
+    <div id="parentSuggDiv">
+        <div class="suggDiv">
+            <div class="suggContainer">
+                <img src="boresreachwhite.png" alt="" width="300" id="imgBore">
+                <div id="isee">
+                    <p >OOP!!  I See You Are Searching Movie For Long time May I Suggest You!!!</p>
+                </div>
+                <div id="suuBtn">
+                    <button id="suggMe">Suggest Me !</button>
+                    <button id="itsOk">I'ts Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        function setupScrolling(scrollRightBtn, scrollLeftBtn, imageWrapperId) {
+            let currentScroll = 0;
+            const imageContainer = scrollRightBtn.parentElement;
+            const imageWrapper = document.getElementById(imageWrapperId);
+            const imageWidth = 250; 
+
+            scrollRightBtn.addEventListener('click', () => {
+                const maxScroll = imageWrapper.scrollWidth - imageContainer.clientWidth;
+                currentScroll = Math.min(currentScroll + imageWidth, maxScroll);
+                imageWrapper.style.transform = `translateX(-${currentScroll}px)`;
+            });
+
+            scrollLeftBtn.addEventListener('click', () => {
+                currentScroll = Math.max(currentScroll - imageWidth, 0);
+                imageWrapper.style.transform = `translateX(-${currentScroll}px)`;
+            });
+        }
+
+        setupScrolling(document.querySelector('#downScrolling1 .scrollRight'), document.querySelector('#downScrolling1 .scrollLeft'), 'imageWrapper1');
+        setupScrolling(document.querySelector('#downScrolling2 .scrollRight'), document.querySelector('#downScrolling2 .scrollLeft'), 'imageWrapper2');
+        setupScrolling(document.querySelector('#downScrolling3 .scrollRight'), document.querySelector('#downScrolling3 .scrollLeft'), 'imageWrapper3');
+        setupScrolling(document.querySelector('#downScrolling4 .scrollRight'), document.querySelector('#downScrolling4 .scrollLeft'), 'imageWrapper4');
+        setupScrolling(document.querySelector('#downScrolling5 .scrollRight'), document.querySelector('#downScrolling5 .scrollLeft'), 'imageWrapper5');
+        setupScrolling(document.querySelector('#downScrolling6 .scrollRight'), document.querySelector('#downScrolling6 .scrollLeft'), 'imageWrapper6');
+        setupScrolling(document.querySelector('#downScrolling7 .scrollRight'), document.querySelector('#downScrolling7 .scrollLeft'), 'imageWrapper7');
+
+
+
+
+        window.addEventListener('scroll', function() {
+            let topContainer = document.getElementById('topContainer');
+            if(window.scrollY < 200){
+                topContainer.classList.remove('transparent');
+            }
+            if (window.scrollY > 560) {
+                topContainer.classList.remove('transparent');
+            } else {
+                topContainer.classList.add('transparent');
+            }
+        });
+
+
+
+
+        let video = document.querySelector('video');
+
+        let coverPage = document.querySelector("#coverImage");
+
+        coverPage.addEventListener('mousein',()=>{
+            setTimeout(()=>{
+                video.style.display = "block";
+                video.play();
+            },3000)
+        })
+        coverPage.addEventListener('mousemove',()=>{
+            setTimeout(()=>{
+                video.style.display = "block";
+                video.muted = true;
+                video.play();
+                
+                let playContain = document.getElementById('playContain');
+            },1000)
+        })
+        coverPage.addEventListener('mouseleave',()=>{
+            setTimeout(()=>{
+                video.style.display = "none";
+                video.pause();
+            },1000)
+        })
+
+        let LanguageDiv = document.getElementById("myLangDiv");
+        let Language = document.getElementById("languageL");
+        Language.addEventListener("mouseenter",()=>{
+            LanguageDiv.style.display="block";
+            setTimeout(()=>{
+                LanguageDiv.addEventListener("mouseout",()=>{
+                    LanguageDiv.style.display="none";
+                });
+
+                LanguageDiv.addEventListener("mouseover",()=>{
+                    LanguageDiv.style.display="block";
+                });
+                
+                setTimeout(()=>{
+                LanguageDiv.style.display="none";
+            },5000)
+            },1000)
+            
+        })
+
+        setTimeout(() =>{
+            let suggestionDiv = document.querySelector("#parentSuggDiv");
+            suggestionDiv .style.display = "block";
+
+            let itsOk = document.getElementById("itsOk");
+            itsOk.addEventListener('click',()=>{
+                suggestionDiv .style.display = "none";
+            })
+
+        },10000)
+
+        let mainSearch = document.getElementById("mainSearch");
+        mainSearch.addEventListener('click',()=>{
+            let searchShow = document.getElementById('searchBoxContainer');
+            searchShow.style.transition = "3s"
+            searchShow.style.display = "block"
+            searchShow.addEventListener('dblclick',()=>{
+                searchShow.style.display = "none"
+            })
+        })
+
+        let np = document.getElementById("neewAndPop")
+        np.addEventListener('click',()=>{
+            window.location.href = "#downScrolling1";
+        })
+    </script>
+</body>
+</html>
